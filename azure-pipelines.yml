@@ -1,0 +1,29 @@
+# Starter pipeline
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Free Trial (74dfc03c-66da-45db-b5d4-427dcc410d7c)'
+    appType: 'webApp'
+    appName: 'node-express-prod'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
